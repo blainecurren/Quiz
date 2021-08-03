@@ -145,7 +145,22 @@ submitScoreBtn.addEventListener("click", function highscore() {
   }
 });
 
-// This function displays the high scores page while hiding all of the other pages from
+// generate high score Function
+function generateHighscores() {
+  highscoreDisplayName.innerHTML = "";
+  highscoreDisplayScore.innerHTML = "";
+  var highscores = JSON.parse(localStorage.getItem("savedHighscores")) || [];
+  for (i = 0; i < highscores.length; i++) {
+    var newNameSpan = document.createElement("li");
+    var newScoreSpan = document.createElement("li");
+    newNameSpan.textContent = highscores[i].name;
+    newScoreSpan.textContent = highscores[i].score;
+    highscoreDisplayName.appendChild(newNameSpan);
+    highscoreDisplayScore.appendChild(newScoreSpan);
+  }
+}
+
+// high score Function
 function showHighscore() {
   startQuizDiv.style.display = "none";
   gameoverDiv.style.display = "none";
@@ -156,3 +171,32 @@ function showHighscore() {
   generateHighscores();
 }
 
+// This function clears the local storage of the high scores as well as clearing the text from the high score board
+function clearScore() {
+  window.localStorage.clear();
+  highscoreDisplayName.textContent = "";
+  highscoreDisplayScore.textContent = "";
+}
+
+// This function sets all the variables back to their original values and shows the home page to enable replay of the quiz
+function replayQuiz() {
+  highscoreContainer.style.display = "none";
+  gameoverDiv.style.display = "none";
+  startQuizDiv.style.display = "flex";
+  timeLeft = 76;
+  score = 0;
+  currentQuestionIndex = 0;
+}
+
+// This function is the end page screen that displays your score after either completeing the quiz or upon timer run out
+function showScore() {
+  quizBody.style.display = "none";
+  gameoverDiv.style.display = "flex";
+  clearInterval(timerInterval);
+  highscoreInputName.value = "";
+  finalScoreEl.innerHTML =
+    "You got " + score + " out of " + questions.length + " correct!";
+}
+
+// This button starts the quiz!
+startQuizButton.addEventListener("click", startQuiz);
