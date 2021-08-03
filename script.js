@@ -171,32 +171,3 @@ function showHighscore() {
   generateHighscores();
 }
 
-// This function clears the local storage of the high scores as well as clearing the text from the high score board
-function clearScore() {
-  window.localStorage.clear();
-  highscoreDisplayName.textContent = "";
-  highscoreDisplayScore.textContent = "";
-}
-
-// This function sets all the variables back to their original values and shows the home page to enable replay of the quiz
-function replayQuiz() {
-  highscoreContainer.style.display = "none";
-  gameoverDiv.style.display = "none";
-  startQuizDiv.style.display = "flex";
-  timeLeft = 76;
-  score = 0;
-  currentQuestionIndex = 0;
-}
-
-// This function is the end page screen that displays your score after either completeing the quiz or upon timer run out
-function showScore() {
-  quizBody.style.display = "none";
-  gameoverDiv.style.display = "flex";
-  clearInterval(timerInterval);
-  highscoreInputName.value = "";
-  finalScoreEl.innerHTML =
-    "You got " + score + " out of " + questions.length + " correct!";
-}
-
-// This button starts the quiz!
-startQuizButton.addEventListener("click", startQuiz);
