@@ -1,4 +1,4 @@
-let questions = [
+var questions = [
   {
     numb: 1,
     question: "What is the biggest animal in the world?",
@@ -36,3 +36,4 @@ let questions = [
     ],
   },
 ];
+
