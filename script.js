@@ -91,15 +91,34 @@ function startQuiz() {
 
 // Genereate questions function
 function generateQuizQuestion() {
-    if (currentQuestionIndex === answersIndex) {
-      return showScore();
-    }
-    var currentQuestion = questions[currentQuestionIndex];
-    questionsEl.innerHTML = "<p>" + currentQuestion.question + "</p>";
-    buttonA.innerHTML = currentQuestion.choiceA;
-    buttonB.innerHTML = currentQuestion.choiceB;
-    buttonC.innerHTML = currentQuestion.choiceC;
-    buttonD.innerHTML = currentQuestion.choiceD;
+  if (currentQuestionIndex === answersIndex) {
+    return showScore();
   }
+  var currentQuestion = questions[currentQuestionIndex];
+  questionsEl.innerHTML = "<p>" + currentQuestion.question + "</p>";
+  buttonA.innerHTML = currentQuestion.choiceA;
+  buttonB.innerHTML = currentQuestion.choiceB;
+  buttonC.innerHTML = currentQuestion.choiceC;
+  buttonD.innerHTML = currentQuestion.choiceD;
+}
+
+// Function to check answers
+function checkAnswer(answer) {
+    correct = questions[currentQuestionIndex].correctAnswer;
   
-  
+    if (answer === correct && currentQuestionIndex !== answersIndex) {
+      score++;
+      alert("That Is Correct!");
+      currentQuestionIndex++;
+      generateQuizQuestion();
+      //display in the results div that the answer is correct.
+    } else if (answer !== correct && currentQuestionIndex !== answersIndex) {
+      alert("That Is Incorrect.");
+      currentQuestionIndex++;
+      generateQuizQuestion();
+      //display in the results div that the answer is wrong.
+    } else {
+      showScore();
+    }
+  }
+
