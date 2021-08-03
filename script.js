@@ -171,3 +171,32 @@ function showHighscore() {
   generateHighscores();
 }
 
+// Clear localStorage
+function clearScore() {
+  window.localStorage.clear();
+  highscoreDisplayName.textContent = "";
+  highscoreDisplayScore.textContent = "";
+}
+
+// replay quiz function
+function replayQuiz() {
+  highscoreContainer.style.display = "none";
+  gameoverDiv.style.display = "none";
+  startQuizDiv.style.display = "flex";
+  timeLeft = 76;
+  score = 0;
+  currentQuestionIndex = 0;
+}
+
+// Score display after quiz finished
+function showScore() {
+  quizBody.style.display = "none";
+  gameoverDiv.style.display = "flex";
+  clearInterval(timerInterval);
+  highscoreInputName.value = "";
+  finalScoreEl.innerHTML =
+    "You got " + score + " out of " + questions.length + " correct!";
+}
+
+// start quiz
+startQuizButton.addEventListener("click", startQuiz);
