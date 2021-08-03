@@ -145,3 +145,14 @@ submitScoreBtn.addEventListener("click", function highscore() {
   }
 });
 
+// This function displays the high scores page while hiding all of the other pages from
+function showHighscore() {
+  startQuizDiv.style.display = "none";
+  gameoverDiv.style.display = "none";
+  highscoreContainer.style.display = "flex";
+  highscoreDiv.style.display = "block";
+  endGameBtns.style.display = "flex";
+
+  generateHighscores();
+}
+
