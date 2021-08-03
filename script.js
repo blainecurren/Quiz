@@ -104,21 +104,44 @@ function generateQuizQuestion() {
 
 // Function to check answers
 function checkAnswer(answer) {
-    correct = questions[currentQuestionIndex].correctAnswer;
-  
-    if (answer === correct && currentQuestionIndex !== answersIndex) {
-      score++;
-      alert("That Is Correct!");
-      currentQuestionIndex++;
-      generateQuizQuestion();
-      //display in the results div that the answer is correct.
-    } else if (answer !== correct && currentQuestionIndex !== answersIndex) {
-      alert("That Is Incorrect.");
-      currentQuestionIndex++;
-      generateQuizQuestion();
-      //display in the results div that the answer is wrong.
-    } else {
-      showScore();
-    }
+  correct = questions[currentQuestionIndex].correctAnswer;
+
+  if (answer === correct && currentQuestionIndex !== answersIndex) {
+    score++;
+    alert("That Is Correct!");
+    currentQuestionIndex++;
+    generateQuizQuestion();
+  } else if (answer !== correct && currentQuestionIndex !== answersIndex) {
+    alert("That Is Incorrect.");
+    currentQuestionIndex++;
+    generateQuizQuestion();
+  } else {
+    showScore();
   }
+}
+
+// Score sumbission
+submitScoreBtn.addEventListener("click", function highscore() {
+  if (highscoreInputName.value === "") {
+    alert("Initials cannot be blank");
+    return false;
+  } else {
+    var savedHighscores =
+      JSON.parse(localStorage.getItem("savedHighscores")) || [];
+    var currentUser = highscoreInputName.value.trim();
+    var currentHighscore = {
+      name: currentUser,
+      score: score,
+    };
+
+    gameoverDiv.style.display = "none";
+    highscoreContainer.style.display = "flex";
+    highscoreDiv.style.display = "block";
+    endGameBtns.style.display = "flex";
+
+    savedHighscores.push(currentHighscore);
+    localStorage.setItem("savedHighscores", JSON.stringify(savedHighscores));
+    generateHighscores();
+  }
+});
 
