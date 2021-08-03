@@ -89,3 +89,17 @@ function startQuiz() {
   }, 1000);
 }
 
+// Genereate questions function
+function generateQuizQuestion() {
+    if (currentQuestionIndex === answersIndex) {
+      return showScore();
+    }
+    var currentQuestion = questions[currentQuestionIndex];
+    questionsEl.innerHTML = "<p>" + currentQuestion.question + "</p>";
+    buttonA.innerHTML = currentQuestion.choiceA;
+    buttonB.innerHTML = currentQuestion.choiceB;
+    buttonC.innerHTML = currentQuestion.choiceC;
+    buttonD.innerHTML = currentQuestion.choiceD;
+  }
+  
+  
