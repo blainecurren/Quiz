@@ -1,24 +1,26 @@
-var body = document.getElementById("quiz");
+// Gathering HTML elements for manipulation
+var buttonA = document.getElementById("a");
+var buttonB = document.getElementById("b");
+var buttonC = document.getElementById("c");
+var buttonD = document.getElementById("d");
+var startQuizButton = document.getElementById("startbtn");
+var startQuizDiv = document.getElementById("startpage");
+var highscoreContainer = document.getElementById("highscoreContainer");
+var highscoreDiv = document.getElementById("high-scorePage");
+var highscoreInputName = document.getElementById("initials");
+var highscoreDisplayName = document.getElementById("highscore-initials");
+var endGameBtns = document.getElementById("endGameBtns");
+var submitScoreBtn = document.getElementById("submitScore");
+var highscoreDisplayScore = document.getElementById("highscore-score");
+var quizBody = document.getElementById("quiz");
 var resultsEl = document.getElementById("result");
 var finalScoreEl = document.getElementById("finalScore");
 var gameoverDiv = document.getElementById("gameover");
 var questionsEl = document.getElementById("questions");
 var quizTimer = document.getElementById("timer");
-var startButton = document.getElementById("startbtn");
-var startDiv = document.getElementById("startpage");
-var highscoreContainer = document.getElementById("highscoreContainer");
-var highscoreDiv = document.getElementById("high-scorePage");
-var highscoreInputName = document.getElementById("initials");
-var highscoreDisplayName = document.getElementById("highscore-initials");
-var endBtn = document.getElementById("endGameBtns");
-var submitBtn = document.getElementById("submitScore");
-var highscoreDisplayScore = document.getElementById("highscore-score");
-var choiceA = document.getElementById("a");
-var choiceB = document.getElementById("b");
-var choiceC = document.getElementById("c");
-var choiceD = document.getElementById("d");
 
-var quizQuestions = [
+// Questions
+var questions = [
   {
     question: "What is the biggest animal in the world?",
     choiceA: "Orca",
@@ -61,3 +63,29 @@ var quizQuestions = [
     correctAnswer: "b",
   },
 ];
+
+var correct;
+var currentQuestionIndex = 0;
+var timerInterval;
+var score = 0;
+var answersIndex = questions.length;
+var timeLeft = 76;
+
+// Start quiz function
+function startQuiz() {
+  gameoverDiv.style.display = "none";
+  startQuizDiv.style.display = "none";
+  generateQuizQuestion();
+
+  //Timer
+  timerInterval = setInterval(function () {
+    timeLeft--;
+    quizTimer.textContent = "Time left: " + timeLeft;
+
+    if (timeLeft === 0) {
+      clearInterval(timerInterval);
+      showScore();
+    }
+  }, 1000);
+}
+
